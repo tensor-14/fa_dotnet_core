@@ -1,4 +1,4 @@
-﻿// Copyright (c) FieldAssist. All Rights Reserved.
+// Copyright (c) FieldAssist. All Rights Reserved.
 
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -11,6 +11,12 @@ namespace FA.Cache.Providers
         private readonly ILogger<RedisCacheProvider> _logger;
         private readonly IDatabase _cache;
         private readonly IServer _server;
+
+        /// <summary>
+        /// Exposes the underlying Redis database connection.
+        /// Useful for sharing the connection with <see cref="FA.Cache.Providers.RedisDistributedLockProvider"/>.
+        /// </summary>
+        public IDatabase Database => _cache;
 
         public RedisCacheProvider(ILogger<RedisCacheProvider> logger, string redisConnectionString)
         {
